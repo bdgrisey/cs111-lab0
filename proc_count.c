@@ -6,8 +6,18 @@
 
 static struct proc_dir_entry *entry;
 
-static int proc_count(struct seq_file *m, void *v){
-	// TODO: it's all yours
+static int proc_count(struct seq_file *m, void *v)
+{
+	struct task_struct *ptr;
+	uint count = 0;
+	for_each_process(ptr)
+	{
+		count++;
+	}
+	// Put the integer in file
+	seq_put_decimal_ull(m, "", (unsigned long long)count);
+	// End file with newline
+	seq_printf(m, "\n");
 	return 0;
 }
 
